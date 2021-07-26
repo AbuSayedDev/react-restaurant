@@ -3,7 +3,7 @@ import Menu from "./Menu.js";
 import Home from "./Home.js";
 import About from "./About.js";
 import Contact from "./Contact.js";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 const Body = () => {
     return(
@@ -12,11 +12,6 @@ const Body = () => {
             <Route path="/menu" exact component={Menu} />
             <Route path="/about" exact component={About} />
             <Route path="/contact" exact component={Contact} />
-
-            
-
-            {/* <Menu /> */}
-
         </div>
     );
 }
