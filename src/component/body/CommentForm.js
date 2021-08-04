@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Input, FormGroup, Label } from "reactstrap"
-
+import { connect } from "react-redux";
 
 class CommentForm extends Component{
     constructor(props){
@@ -26,18 +26,30 @@ class CommentForm extends Component{
     }
 
     handleSubmit = event =>{
-        console.log("form data", this.state)
+        // console.log("form data", this.state);
+
+        this.props.dispatch({
+            type: "ADD_COMMENT",
+            payload: {
+                dishId: this.props.dishId,
+                author: this.state.author,
+                rating:this.state.rating,
+                comment:this.state.comment,
+            }
+        });
 
         this.setState({
             author: '',
             rating: '',
             comment: ''
         });
+
         event.preventDefault();
     }
 
 
     render(){
+        // console.log(this.props);
         return(
             <div>
                 <Form onSubmit={this.handleSubmit}>
@@ -73,4 +85,4 @@ class CommentForm extends Component{
     }
 }
 
-export  default CommentForm;
+export  default connect()(CommentForm);
