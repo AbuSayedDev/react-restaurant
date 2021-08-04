@@ -32,16 +32,28 @@ class Contact extends Component  {
 
     handleSubmit = event => {
         console.log(this.state);
+
+        this.setState({
+            firstName: "",
+            lastName: "",
+            telnum: "",
+            email: "",
+            agree: false,
+            contactType: "Tel.",
+            message: "",
+        });
+
         event.preventDefault();
     }
 
    render(){
+    document.title = "Contact";
         return(
             <div>
                 <div className="container">
-                    <div className="row">
+                    <div className="row my-5">
                         <div className="col-md-8 m-auto">
-                            <Card className="my-5">
+                            <Card className="mb-5">
                                 <CardHeader>
                                     Contact From
                                 </CardHeader>

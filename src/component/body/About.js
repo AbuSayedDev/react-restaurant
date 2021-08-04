@@ -2,8 +2,9 @@ import React from "react";
 
 
 const About = () => {
+    document.title = "About";
     return(
-        <div>
+        <div className="text-center">
             <h1>About </h1>
         </div>
     );

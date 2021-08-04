@@ -1,5 +1,6 @@
 import React from 'react';
 import ListComment from './ListComment.js';
+import CommentForm from "./CommentForm.js";
 import  { Card, CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
 const DishDetail = props => {
@@ -13,7 +14,9 @@ const DishDetail = props => {
                     <CardText>Price: {props.dish.price} -/</CardText>
                     <hr/>
                     
-                    <ListComment  comments ={props.dish.comments} />
+                    <ListComment  comments ={props.comments} />
+                    <hr/>
+                    <CommentForm />
                </CardBody>
            </Card>
         </div>

@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-import DISHES from '../../data/dishes.js';
+// import DISHES from '../../data/dishes.js';
+// import COMMENTS from '../../data/comments.js';
 import MenuItem  from './MenuItem.js';
 import DishDetail  from './DishDetail.js';
 import { CardColumns, Button, Modal, ModalBody, ModalFooter, } from "reactstrap";
+import { connect } from 'react-redux';
+
+
+// redux state Convert Component props
+const mapStateToProps = state =>{
+    // console.log("data ", state);
+    return{
+        dishes:state.dishes,
+        comments: state.comments,
+    }
+}
 
 
 // Menu
-
 class Menu extends Component {
     state = {
-        dishes: DISHES,
+        // dishes: DISHES,
+        // comments: COMMENTS,
         selectedDish: null,
         modalOpen: false
 
@@ -30,8 +42,9 @@ class Menu extends Component {
     }
     
     render(){
+        document.title = "Menu";
 
-        const menu = this.state.dishes.map( item => {
+        const menu = this.props.dishes.map( item => {
             return(
                 <MenuItem 
                     dish={item} 
@@ -44,17 +57,22 @@ class Menu extends Component {
         // dishDetail null 
         let dishDetail = null;
         if(this.state.selectedDish != null ){
-            dishDetail = <DishDetail  dish={this.state.selectedDish}/>
+            const comments = this.props.comments.filter(comments => {
+                return comments.dishId === this.state.selectedDish.id;
+            });
+            dishDetail = <DishDetail  
+            dish={this.state.selectedDish}
+            comments={comments}/>
         }
 
         return(
             <div className="container">
-                <div className="row">
+                <div className="row text-center">
                     <CardColumns>
                         {menu}
                     </CardColumns>
 
-                    <Modal isOpen={this.state.modalOpen} onClick={this.toggleModal}>
+                    <Modal isOpen={this.state.modalOpen}>
                         <ModalBody>
                             {dishDetail}
                         </ModalBody>
@@ -71,4 +89,4 @@ class Menu extends Component {
 
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);
