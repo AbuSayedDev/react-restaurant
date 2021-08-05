@@ -28,7 +28,7 @@ class CommentForm extends Component{
     }
 
     handleSubmit = event =>{
-        console.log("form data", this.state);
+        // console.log("form data", this.state);
 
         this.props.addComment(
             this.props.dishId, 

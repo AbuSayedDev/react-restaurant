@@ -36,22 +36,39 @@ export const Reducer = (state = initialState, action) => {
 
 
 const dishReducer = (dishState = DISHES, action) =>{
-    return dishState;
+    switch(action.type){
+        default:
+            return dishState;
+    }
 }
 
 
 const commentReducer = (commentState = COMMENTS, action) =>{
-    if(action.type === actionTypes.ADD_COMMENT ) {
-        let comment = action.payload;
-        comment.id = commentState.length;
-        comment.date = new Date().toDateString(); 
+    
+    //switch CONDITIONS
+    switch(action.type){
+        case actionTypes.ADD_COMMENT :
+            let comment = action.payload;
+            comment.id = commentState.length;
+            comment.date = new Date().toDateString(); 
 
-        return commentState.concat(comment);
+            return commentState.concat(comment);
+        default: 
+            return commentState;
     }
-    return commentState;
+
+//IF CONDITIONS
+    // if(action.type === actionTypes.ADD_COMMENT ) {
+    //     let comment = action.payload;
+    //     comment.id = commentState.length;
+    //     comment.date = new Date().toDateString(); 
+
+    //     return commentState.concat(comment);
+    // }
+    // return commentState;
 }
 
-
+// Reducer
 export const Reducer = combineReducers({
     dishes:dishReducer,
     comments:commentReducer
