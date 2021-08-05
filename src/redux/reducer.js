@@ -1,8 +1,6 @@
-import DISHES from "../data/dishes.js"
 import COMMENTS from "../data/comments.js"
 import { combineReducers } from "redux";
 import * as actionTypes from '../redux/actionType.js'
-
 
 /*
 
@@ -35,8 +33,21 @@ export const Reducer = (state = initialState, action) => {
 // Combining Multiple Reducers  function
 
 
-const dishReducer = (dishState = DISHES, action) =>{
+const dishReducer = (dishState = { isLoading: false, dishes: [] }, action) =>{
     switch(action.type){
+        case actionTypes.DISHES_LOADING:
+            return{
+                ...dishState,
+                isLoading: true,
+                dishes: []
+            }
+        case actionTypes.LOAD_DISHES:
+            return{
+                ...dishState,
+                isLoading: false,
+                dishes: action.payload
+
+            }
         default:
             return dishState;
     }
