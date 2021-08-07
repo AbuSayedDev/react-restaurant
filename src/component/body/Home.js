@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Loding from "./Loding.js";
+
 
 class Home extends Component{
 
@@ -7,7 +7,6 @@ class Home extends Component{
         document.title = "Restaurant";
         return(
             <div>
-                <Loding />
             </div>
         );
     }
