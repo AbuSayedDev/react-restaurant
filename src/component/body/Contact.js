@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Card, CardHeader, CardBody, Button, FormGroup, Label, Input, Row, Col} from 'reactstrap';
-import {LocalForm, Control, Errors} from 'react-redux-form';
+import { Card, CardHeader, CardBody, Button, FormGroup, Label, Row, Col} from 'reactstrap';
+import {LocalForm, Control, Errors, controls} from 'react-redux-form';
+
+
+
+// redux form valided
+
+const required = val => val && val.length;
+const isNumber = val => !isNaN(Number(val));
+const valEmail = val => /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(val)
+
 
 class Contact extends Component  {
 /*
@@ -73,7 +82,26 @@ handleSubmit = values => {
                                             <Col md={6}>
                                                 <FormGroup>
                                                     <Label htmlFor="firstName">First Name</Label>
-                                                    <Control.text model=".firstName" className="form-control" name="firstName" placeholder="First Name" />
+                                                    <Control.text model=".firstName" 
+                                                        className="form-control" 
+                                                        name="firstName" 
+                                                        placeholder="First Name"
+                                                        
+                                                        validators = {{
+                                                            required
+                                                        }}
+                                                        />
+                                                        <Errors 
+                                                            className="text-danger"
+                                                            model=".firstName"
+                                                            show="touched"
+                                                            messages={
+                                                                {
+                                                                    required: "First name is required"
+                                                                }
+                                                            }
+                                                        
+                                                        />
 
                                                     {/* <Input type="text" name="firstName" placeholder="First Name"
                                                     value={this.state.firstName} onChange={this.handleInputChange} /> */}
@@ -83,7 +111,24 @@ handleSubmit = values => {
                                             <Col md={6}>
                                                 <FormGroup>
                                                     <Label htmlFor="lastName">Last Name</Label>
-                                                    <Control.text model=".lastName" className="form-control" name="lastName"  placeholder="Last Name" />
+                                                    <Control.text model=".lastName" 
+                                                        className="form-control" 
+                                                        name="lastName"  
+                                                        placeholder="Last Name" 
+
+                                                        validators = {{
+                                                            required
+                                                        }}
+                                                        />
+                                                        <Errors 
+                                                            className="text-danger"
+                                                            model=".lastName"
+                                                            show="touched"
+                                                            messages={
+                                                                {
+                                                                    required: "Last name is required"
+                                                                }
+                                                            } />
 
                                                     {/* <Input type="text" name="lastName"  placeholder="Last Name"
                                                     value={this.state.lastName} onChange={this.handleInputChange} /> */}
@@ -95,7 +140,27 @@ handleSubmit = values => {
                                             <Col md={6}>
                                                 <FormGroup>
                                                     <Label htmlFor="telnum">Contact Tel.</Label>
-                                                    <Control.text model=".telnum" className="form-control" name="telnum"  placeholder="Tel. Number" />
+                                                    <Control.text model=".telnum" 
+                                                        className="form-control" 
+                                                        name="telnum"  
+                                                        placeholder="Tel. Number" 
+                                                        
+                                                        validators = {{
+                                                            required,
+                                                            isNumber
+                                                        }}
+                                                        />
+                                                        <Errors 
+                                                            className="text-danger"
+                                                            model=".telnum"
+                                                            show="touched"
+                                                            messages={
+                                                                {
+                                                                    required: "Number is required, ",
+                                                                    isNumber: "Invalid Number!"
+
+                                                                }
+                                                            } />
 
                                                     {/* <Input type="tel" name="telnum"  placeholder="Tel. Number"
                                                     value={this.state.telnum} onChange={this.handleInputChange} /> */}
@@ -105,7 +170,27 @@ handleSubmit = values => {
                                             <Col md={6}>
                                                 <FormGroup>
                                                     <Label htmlFor="email">Email</Label>
-                                                    <Control.text model=".email" className="form-control" name="email"  placeholder="Email" />
+                                                    <Control.text model=".email" 
+                                                        className="form-control" 
+                                                        name="email"  
+                                                        placeholder="Email" 
+                                                        
+                                                        validators = {{
+                                                            required,
+                                                            valEmail
+                                                        }}
+                                                        />
+                                                        <Errors 
+                                                            className="text-danger" 
+                                                            model=".email"
+                                                            show="touched"
+                                                            messages={
+                                                                {
+                                                                    required: "Email is required, ",
+                                                                    valEmail: "Invalid Email!"
+                                                                }
+                                                            }
+                                                        />
 
 
                                                     {/* <Input type="email" name="email"  placeholder="Email"
@@ -131,10 +216,26 @@ handleSubmit = values => {
                                             <Col md={6}>
                                                 <FormGroup>
                                                 <Label for="exampleSelect">Contact Type</Label>
-                                                <Control.select model=".contactType" className="form-control" name="contactType" id="exampleSelect" >
+                                                <Control.select model=".contactType" className="form-control" 
+                                                    name="contactType" 
+                                                    id="exampleSelect" 
+                                                    validators = {{
+                                                        required
+                                                      }}>
+                                                          
                                                     <option>Tel.</option>
                                                     <option>Email</option>
                                                 </Control.select>
+                                                <Errors 
+                                                    className="text-danger"
+                                                    model=".contactType"
+                                                    show="touched"
+                                                    messages={
+                                                        {
+                                                            required: "ContactType is required"
+
+                                                        }
+                                                    } />
                                                 
                                                 {/* <Input type="select" name="contactType" id="exampleSelect" value={this.state.contactType} onChange={this.handleInputChange} >
                                                     <option>Tel.</option>
